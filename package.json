@@ -13,5 +13,7 @@
     "puppeteer": "^1.12.1",
     "es6-promise": "^4.2.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }

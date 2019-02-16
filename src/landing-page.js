@@ -1,18 +1,18 @@
 module.exports.chooseFilms = async (page) => {
-    const browseLink = await page.$x("//a[contains(text(), 'Browse')]");
+    // const browseLink = await page.$x("//a[contains(text(), 'Browse')]");
 
-    if (browseLink.length > 0) {
-      await browseLink[0].click();
-    } else {
-      throw new Error("browse Link not found");
-    }
-    const filmsLink = await page.$x("//a[contains(text(), 'Films')]");
+    // if (browseLink.length > 0) {
+    //   await browseLink[0].click();
+    // } else {
+    //   throw new Error("browse Link not found");
+    // }
+    // const filmsLink = await page.$x("//a[contains(text(), 'Films')]");
 
-    if (filmsLink.length > 0) {
-      await filmsLink[0].click();
-    } else {
-      throw new Error("Films Link not found");
-    }
+    // if (filmsLink.length > 0) {
+    //   await filmsLink[0].click();
+    // } else {
+    //   throw new Error("Films Link not found");
+    // }
 
     await page.click("button[aria-label='View in grid view']")
 
