@@ -13,10 +13,10 @@ module.exports.scrapeInfiniteScrollItems = async function (
 
     try {
       while (items.length !== previousItemsCount) {
-        previousItemsCount = items.count
+        previousItemsCount = items.length
         items = await extractItems()
         
-        log.logInfo('item count = ' + items.count + ', previous item count = ' + previousItemsCount + ', last movie = ' + items[items.count-1])
+        log.logInfo('item count = ' + items.length + ', previous item count = ' + previousItemsCount + ', last movie = ' + items[items.length-1])
         
         previousHeight = await page.evaluate('document.body.scrollHeight');
         await page.evaluate('window.scrollTo(0, document.body.scrollHeight)');

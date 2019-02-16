@@ -1,1 +1,1 @@
-module.exports.genreUrl = function(id) { return  "https://www.netflix.com/browse/genre/" + id + "?bc=34399" }
+module.exports.genreUrl = function(id) { return  "https://www.netflix.com/browse/genre/" + id + "?bc=34399&so=az" }

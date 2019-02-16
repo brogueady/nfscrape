@@ -11,7 +11,8 @@
   "author": "Adrian Brogan",
   "dependencies": {
     "puppeteer": "^1.12.1",
-    "es6-promise": "^4.2.5"
+    "es6-promise": "^4.2.5",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

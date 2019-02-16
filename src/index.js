@@ -7,7 +7,7 @@ const profilePage = require('./profile-page')
 const log = require('./log')
 const fs = require('fs');
 const genreUrl = require('./config');
-
+const lodash = require('lodash');
 
 (async () => {
   const username = process.argv[2]
@@ -43,6 +43,7 @@ const genreUrl = require('./config');
     {name: 'horror', code:'8711'},{name: 'independent', code:'7077'},{name: 'international', code:'78367'},{name: 'kids & family', code:'783'},{name: 'lgbtq', code:'5977'}
     ,{name: 'music & musicals', code:'52852'},{name: 'romance', code:'8883'},{name: 'sci-fi', code:'1492'},{name: 'sports', code:'4370'},{name: 'stand-up comedy', code:'11559'}
     ,{name: 'thrillers', code:'8933'} ]
+    // const genreIds = [{name: 'sports', code:'4370'}]
 
     let movies = []
     let genre;
@@ -51,17 +52,26 @@ const genreUrl = require('./config');
           timeout: 25000,
           waitUntil: 'networkidle2',
         });
-
-        await landingPage.chooseFilms(page)
         await page.waitFor(3000)
-  
         const items = await scroll.scrapeInfiniteScrollItems(page, extractItems, genre);
-        movies.push(items)
+        movies = movies.concat(items)
     }
     
+    log.logInfo("number of movies found = " + movies.length)
+    movies = lodash.uniq(movies)
+    log.logInfo("number of movies after de-dup = " + movies.length)
+
+    let movieObjects = []
+    movies.forEach(movieTitle => {
+        movieObjects.push({ title: movieTitle})
+    })
+
+    let movieJson = {
+      movies: movieObjects
+    }
 
     // Save extracted items to a file.
-    fs.writeFileSync('./movie-titles.log', movies.join(',\n') + '\n');
+    fs.writeFileSync('./movie-titles.log', JSON.stringify(movieJson))
 
     await page.waitFor(20000)
   } catch (e) {
